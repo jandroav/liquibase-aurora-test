@@ -9,7 +9,7 @@ databaseChangeLog:
     changes:
     - createFunction:
         encoding:  UTF-8
-        path:  iif.sql
+        path:  ./iif.sql
         relativeToChangelogFile: true
         functionName: iif
     rollback:
