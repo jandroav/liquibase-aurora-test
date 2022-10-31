@@ -26,7 +26,7 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: 'liquibase/liquibase:4.9.1' # The Go version to download (if necessary) and use.
-        options: -v .:/liquibase/changelog
+        options: -v ${{ github.workspace }}:/liquibase/changelog
         shell: sh
         run: |
           liquibase \
