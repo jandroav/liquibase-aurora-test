@@ -6,7 +6,7 @@ jobs:
     name: Test Liquibase Action
     steps:
       - uses: actions/checkout@v2
-      - uses: liquibase/liquibase-github-action@v2
+      - uses: liquibase/liquibase-github-action@v7
         with:
           operation: 'update'
           classpath: 'changelogs'
@@ -14,4 +14,4 @@ jobs:
           username: ${{ secrets.LIQUIBASE_ODS_USERNAME }}
           password: ${{ secrets.LIQUIBASE_ODS_PASSWORD }}
           url: ${{ secrets.LIQUIBASE_ODS_JDBC_URL }}
-          licenseKey: ${{ secrets.LIQUIBASE_PRO_KEY }}
+          proLicenseKey: ${{ secrets.LIQUIBASE_PRO_KEY }}
