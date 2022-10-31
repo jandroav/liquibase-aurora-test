@@ -1,0 +1,45 @@
+name: ci
+on:
+  push:
+    branches:
+      - '*'
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+jobs:
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v3
+
+    # Setup Go
+    - name: liquibase
+      uses: addnab/docker-run-action@v3
+      with:
+        image: 'liquibase/liquibase:4.9.1' # The Go version to download (if necessary) and use.
+        options: -v ${{ github.workspace }}:/liquibase/changelog
+        shell: sh
+        run: |
+          liquibase \
+          --changelog-file=./changelog/changelogs/changelog-main.yaml \
+          --url=${{ secrets.LIQUIBASE_ODS_JDBC_URL }} \
+          --username=${{ secrets.LIQUIBASE_ODS_USERNAME }} \
+          --password=${{ secrets.LIQUIBASE_ODS_PASSWORD }} \
+          --contexts="${{ secrets.LIQUIBASE_ODS_CONTEXTS }}" \
+          --liquibase-schema-name=liquibase \
+          --hub-mode=meta \
+          --hub-api-key=${{ secrets.LIQUIBASE_HUB_API_KEY }} \
+          --pro-license-key=${{ secrets.LIQUIBASE_PRO_KEY }} \
+          --log-level=FINE \
+          --sql-log-level=INFO \
+          update \
+          -Dversion="${{ env.DB_VERSION }}" \
+          -Daws_glue_pw="${{ secrets.LIQUIBASE_ODS_AWS_GLUE_PASSWORD }}"
+
+
