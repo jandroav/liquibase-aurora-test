@@ -14,3 +14,4 @@ jobs:
           username: ${{ secrets.LIQUIBASE_ODS_USERNAME }}
           password: ${{ secrets.LIQUIBASE_ODS_PASSWORD }}
           url: ${{ secrets.LIQUIBASE_ODS_JDBC_URL }}
+          licenseKey: ${{ secrets.LIQUIBASE_PRO_KEY }}
