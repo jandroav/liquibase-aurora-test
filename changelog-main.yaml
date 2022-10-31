@@ -8,8 +8,8 @@ databaseChangeLog:
     comment: creates the iif helper function
     changes:
     - createFunction:
-        encoding:  UTF-8
-        path:  ./iif.sql
+        encoding: UTF-8
+        path: iif.sql
         relativeToChangelogFile: true
         functionName: iif
     rollback:

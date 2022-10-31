@@ -30,7 +30,7 @@ jobs:
         shell: sh
         run: |
           liquibase \
-          --changelog-file=./changelog-main.yaml \
+          --changelog-file=changelog-main.yaml \
           --url=${{ secrets.LIQUIBASE_ODS_JDBC_URL }} \
           --username=${{ secrets.LIQUIBASE_ODS_USERNAME }} \
           --password=${{ secrets.LIQUIBASE_ODS_PASSWORD }} \
