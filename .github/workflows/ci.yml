@@ -8,6 +8,9 @@ on:
   pull_request:
     paths-ignore:
       - '**.md'
+env:
+  DB_VERSION: 1
+
 jobs:
   build:
     # The type of runner that the job will run on
@@ -31,15 +34,11 @@ jobs:
           --url=${{ secrets.LIQUIBASE_ODS_JDBC_URL }} \
           --username=${{ secrets.LIQUIBASE_ODS_USERNAME }} \
           --password=${{ secrets.LIQUIBASE_ODS_PASSWORD }} \
-          --contexts="${{ secrets.LIQUIBASE_ODS_CONTEXTS }}" \
           --liquibase-schema-name=liquibase \
-          --hub-mode=meta \
-          --hub-api-key=${{ secrets.LIQUIBASE_HUB_API_KEY }} \
+          --hub-mode=off \
           --pro-license-key=${{ secrets.LIQUIBASE_PRO_KEY }} \
           --log-level=FINE \
           --sql-log-level=INFO \
           update \
-          -Dversion="${{ env.DB_VERSION }}" \
-          -Daws_glue_pw="${{ secrets.LIQUIBASE_ODS_AWS_GLUE_PASSWORD }}"
-
+          -Dversion="${{ env.DB_VERSION }}"
 
