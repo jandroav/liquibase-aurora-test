@@ -3,14 +3,13 @@ databaseChangeLog:
     id:  iif
     author: jandroav
     context: all
-    labels: v.${version}
     runOnChange: true
     failonError: true
     comment: creates the iif helper function
     changes:
     - createFunction:
         encoding:  UTF-8
-        path:  ./iif.sql
+        path:  iif.sql
         relativeToChangelogFile: true
         functionName: iif
     rollback:
